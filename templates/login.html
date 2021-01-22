@@ -1,0 +1,30 @@
+<html>
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'logins.css' %}">
+    <style>
+    body {background-image: url('{% static 'image8.jpg' %}');}
+    </style>
+</head>
+<body>
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <div class="fadeIn first">
+     <h2> LOGIN </h2>
+    </div>
+    <form method="POST" action="login_request">
+        {% csrf_token %}
+        {{form.as_p}}
+      <input type="text" id="login" class="fadeIn second" name="email" placeholder="email">
+      <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
+      <input type="submit" class="fadeIn fourth" value="Log In">
+    </form>
+    <div id="formFooter">
+      <a class="underlineHover" href="#">Forgot Password?</a><br><br>
+      <a class="underlineHover" href="form_view">Registration</a>
+    </div>
+      {% if messages %}
+    <h2 style="color:red"> {{message.messagedata}}</h2>
+    {% endif %}
+ </body>
+</html>

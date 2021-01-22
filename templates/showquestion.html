@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+     <title>showquestion</title>
+  </head>
+  <body>
+   {% include "headerfooter.html" %}
+   <form class="container mt-4" style="width: 70%" method="post" action="show_question">
+    {% csrf_token %}
+  <div class="form-group row">
+    <label for="course" class="col-sm-1 col-form-label">COURSE:</label>
+    <div class="col-sm-3">
+       <select class="form-control" name="course" id="input" required>
+           <option value="">SELECT COURSE</option>
+           <option value="BCA">B.C.A</option>
+           <option value="MCA">M.C.A</option>
+           <option value="BBA">B.B.A</option>
+        </select>
+    </div>
+    <label for="semester" class="col-sm-1 col-form-label pl-1">SEMESTER:</label>
+           <div class="col-sm-3">
+            <select class="form-control" name="semester" id="output" required>
+        </select>
+        </div>
+    <label for="subject" class="col-sm-1 col-form-label">SUBJECT:</label>
+    <div class="col-sm-3">
+       <select name="subject" class="form-control" id="outoutput"  required>
+        </select>
+    </div>
+  </div>
+       <div class="form-group row">
+       <button type="submit" class="btn btn-primary ml-auto mr-auto" id="submit" name="submit">submit</button>
+       </div>
+   </form>
+   <table class="table container mt-3">
+  <thead>
+    <tr>
+      <th scope="col">QUE.NO.</th>
+      <th scope="col">QUESTION</th>
+      <th scope="col">DIFFICULTY</th>
+      <th scope="col">SECTION</th>
+      <th scope="col">MODIFY</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for i in que %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+        <td><pre>{{i.question}}</pre></td>
+      <td>{{i.difficulty}}</td>
+      <td>{{i.section}}</td>
+      <td></td>
+    </tr>
+   {% endfor %}
+  </tbody>
+</table>
+   <script>
+var course={
+MCA:['select','1','2','3','4','5'],
+BCA:['select','1','2','3','4','5','6'],
+BBA:['select','1','2','3','4','5','6']
+}
+var BCA={
+   1:['select ','hb','b','c','d'],
+   2:['select','A','B','C','D'],
+   3:['select','ABC','EFG','IJK'],
+   4:['select','VIK','SHI','BRI'],
+   5:['select','AKAS','DEEP','GAG'],
+   6:['select','VAI','SEXY','SHREYA'],
+}
+var MCA={
+   1:['SELECT SUBJECT','professional communicational','organization behaviour','computer concept and programming in c','discerte mathemetics','computer organisation'],
+   2:['SELECT SUBJECT','C.B.N.S.T','accounting & financial management','data sturcture in c','operating system','e-commerce'],
+   3:['SELECT SUBJECT','obeject oriented system modeling','computer network','internet and java programming','design and analysis of algorithems','software engineering'],
+   4:['SELECT SUBJECT','optimization technique','theory of computation','D.B.M.S','computer graphics','soft computing'],
+   5:['SELECT SUBJECT','information security and cyber laws','mobile computing','artificial intelligent','computer design','digital image processing'],
+}
+var BBA={
+   1:['select','a','b','c','d'],
+   2:['select','A','B','C','D'],
+   3:['select','ABC','EFG','IJK'],
+   4:['select','VIK','SHI','BRI'],
+   5:['select','AKAS','DEEP','GAG'],
+   6:['select','VAI','SEXY','SHREYA'],
+   7:['select','VAI','SEXY','SHREYA'],
+   8:['select','VAI','SEXY','SHREYA']
+}
+var main = document.getElementById('input');
+var out = document.getElementById('output');
+
+main.addEventListener('change',function(){
+var selected_option = course[this.value];
+appender(selected_option,out);
+out.classList.add(this.value);
+});
+function appender(data,id){
+    while(id.options.length>0)
+{
+  id.options.remove(0);
+}
+    for(var i=0;i<data.length;i++){
+        var opt = document.createElement('option');
+        opt.value = data[i];
+        if(opt.value == 'SELECT SEMESTER' || opt.value == 'SELECT SUBJECT')
+        {opt.value = '';}
+        opt.innerHTML = data[i];
+        id.appendChild(opt);
+    }
+}
+out.addEventListener('change',function(){
+    var course = this.classList[1];
+    this.classList.remove(course);
+    var ele = document.getElementById('outoutput');
+    var sub=null;
+    switch(course){
+        case "MCA": sub = MCA; break;
+        case "BCA": sub = BCA; break;
+        case "BBA": sub = BBA; break;
+    }
+    appender(sub[this.value],ele);
+});
+</script>
+  </body>
+</html>

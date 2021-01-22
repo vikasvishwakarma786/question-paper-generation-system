@@ -1,0 +1,187 @@
+<html>
+ <head>
+  <title>createqpaper</title>
+ </head>
+<body>
+{% include "headerfooter.html" %}
+<form class="container mt-4" method="post" onsubmit="return validate()" action="create_request">
+    {% csrf_token %}
+  <div class="form-group row">
+    <label for="questionid" class="col-sm-2 col-form-label">COURSE:</label>
+     <div class="col-sm-4">
+            <select class="form-control" id="input" name="course" required>
+           <option value="">SELECT COURSE</option>
+           <option value="BCA">B.C.A</option>
+           <option value="MCA">M.C.A</option>
+           <option value="BBA">B.B.A</option>
+        </select>
+        </div>
+    <label for="semester" class="col-sm-2 col-form-label">SEMESTER:</label>
+           <div class="col-sm-4">
+            <select class="form-control" name="semester" id="output" required>
+        </select>
+        </div>
+  </div>
+    <div class="form-group row">
+    <label for="subject" class="col-sm-2 col-form-label">SUBJECT:</label>
+    <div class="col-sm-4">
+        <select id="outoutput" name="subject" class="form-control" required>
+        </select>
+    </div>
+    <label for="difficulty" class="col-sm-2 col-form-label">DIFFICULTY OF QUESTION:</label>
+    <div class="col-sm-4">
+       <select class="form-control" name="difficulty" required>
+           <option value="">SELECT DIFFICULTY</option>
+           <option value="easy">EASY</option>
+           <option value="medium">MEDIUM</option>
+           <option value="hard">HARD</option>
+        </select>
+    </div>
+  </div>
+    <div class="form-group row">
+        <label for="section" class="col-sm-2 col-form-label">NO. OF SECTION:</label>
+        <div class="col-sm-4">
+            <select class="form-control" name="no_of_section" id="no_of_section" required>
+            <option value="">SELECT</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            </select>
+        </div>
+     <label for="section" class="col-sm-2 col-form-label">QUESTION PER SECTION:</label>
+           <div class="col-sm-4">
+               <select class="form-control" id="no_of_question" name="no_of_question">
+           <option value="">SELECT</option>
+           <option value="2">2</option>
+           <option value="3">3</option>
+           <option value="4">4</option>
+           <option value="5">5</option>
+           <option value="6">6</option>
+           <option value="7">7</option>
+           <option value="8">8</option>
+           <option value="9">9</option>
+        </select>
+        </div>
+  </div>
+    <div class="form-group row">
+    <label for="" class="col-sm-2 col-form-label">QUESTION PAPER CODE:</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" name="code"  required="required">
+    </div>
+    <label for="" class="col-sm-2 col-form-label">CHOICES PER SECTION:</label>
+    <div class="col-sm-4">
+        <select class="form-control" name="choice" id="choice" required>
+      <option value="">SELECT</option>
+            <option value="0">0</option>
+           <option value="1">1</option>
+           <option value="2">2</option>
+        </select>
+    </div></div>
+    <div class="form-group row" id="marks_entry" >
+          <label for="" class="col-sm-2 col-form-label" >TIME FOR EXAM:</label>
+    <div class="col-sm-4">
+      <select class="form-control" name="time" required>
+      <option value="">SELECT</option>
+            <option value="HALF HOUR">HALF HOUR</option>
+           <option value="ONE HOUR">ONE HOUR</option>
+           <option value="ONE AND HALF HOUR">ONE AND HALF HOUR</option>
+          <option value="TWO HOUR">TWO HOUR</option>
+          <option value="TWO AND HALF HOUR">TWO AND HALF HOUR</option>
+          <option value="THREE HOUR">THREE HOUR</option>
+        </select>
+    </div>
+        <label for="" class="col-sm-2 col-form-label ">MARKS:</label>
+      <input type="text" class="form-control col-sm-1 ml-3" name="secA"  placeholder="sec-A" id="one" disabled>
+      <input type="text" class="form-control col-sm-1 ml-4" name="secB" placeholder="sec-B" id="two" disabled>
+        <input type="text" class="form-control col-sm-1 ml-4" name="secC" placeholder="sec-C" id="three" disabled>
+    </div>
+    <br>
+    <div style="text-align: center;">
+    <button type="submit" class="btn btn-primary" >GENERATE</button>
+    </div>
+</form>
+<script>
+var course={
+MCA:['SELECT SEMESTER','First','Second','Third','Fourth','Fifth'],
+BCA:['SELECT SEMESTER','First','Second','Third','Fourth','Fifth','Sixth'],
+BBA:['SELECT SEMESTER','First','Second','Third','Fourth','Fifth','Sixth'],
+}
+var BCA={
+   First:['SELECT SUBJECT','hb','b','c','d'],
+   Second:['SELECT SUBJECT','A','B','C','D'],
+   Third:['SELECT SUBJECT','ABC','EFG','IJK'],
+   Fourth:['SELECT SUBJECT','VIK','SHI','BRI'],
+   Fifth:['SELECT SUBJECT','AKAS','DEEP','GAG'],
+   Sixth:['SELECT SUBJECT','VAI','SEXY','SHREYA'],
+}
+var MCA={
+   First:['SELECT SUBJECT','professional communicational','organization behaviour','computer concept and programming in c','discerte mathemetics','computer organisation'],
+   Second:['SELECT SUBJECT','C.B.N.S.T','accounting & financial management','data sturcture in c','operating system','e-commerce'],
+   Third:['SELECT SUBJECT','obeject oriented system modeling','computer network','internet and java programming','design and analysis of algorithems','software engineering'],
+   Fourth:['SELECT SUBJECT','optimization technique','theory of computation','D.B.M.S','computer graphics','soft computing'],
+   Fifth:['SELECT SUBJECT','information security and cyber laws','mobile computing','artificial intelligent','computer design','digital image processing'],
+}
+var BBA={
+   First:['SELECT SUBJECT','a','b','c','d'],
+   Second:['SELECT SUBJECT','A','B','C','D'],
+   Third:['SELECT SUBJECT','ABC','EFG','IJK'],
+   Fourth:['SELECT SUBJECT','VIK','SHI','BRI'],
+   Fifth:['SELECT SUBJECT','AKAS','DEEP','GAG'],
+   Sixth:['SELECT SUBJECT','VAI','SEXY','SHREYA'],
+}
+var main = document.getElementById('input');
+var out = document.getElementById('output');
+main.addEventListener('change',function(){
+var selected_option = course[this.value];
+window.value = this.value;
+appender(selected_option,out);
+});
+function appender(data,id){
+    while(id.options.length>0)
+{
+  id.options.remove(0);
+}
+    for(var i=0;i<data.length;i++){
+        var opt = document.createElement('option');
+        opt.value = data[i];
+        if(opt.value == 'SELECT SEMESTER' || opt.value == 'SELECT SUBJECT')
+        {opt.value = '';}
+        opt.innerHTML = data[i];
+        id.appendChild(opt);
+    }
+}
+out.addEventListener('change',function(){
+    var ele = document.getElementById('outoutput');
+    var sub=null;
+    switch(window.value){
+        case "MCA": sub = MCA; break;
+        case "BCA": sub = BCA; break;
+        case "BBA": sub = BBA; break;
+    }
+    appender(sub[this.value],ele);
+});
+
+var sec = document.getElementById('no_of_section');
+var one = document.getElementById('one');
+var two = document.getElementById('two');
+var three = document.getElementById('three');
+sec.addEventListener('change',function(){
+var selected_option = sec.value;
+console.log(selected_option);
+switch(selected_option){
+        case "1": one.disabled = false; two.disabled = true; three.disabled = true; break;
+        case "2": one.disabled = false; two.disabled = false; three.disabled = true; break;
+        case "3": one.disabled = false; two.disabled = false; three.disabled = false; break;
+    }
+});
+function validate(){
+var ques = document.getElementById('no_of_question').value;
+var choice = document.getElementById('choice').value;
+if(ques == choice){
+alert("there are only two question in every section. Please take more than two question if you want no. of choice be 2");
+return false;
+}
+return true;}
+</script>
+</body>
+</html>
